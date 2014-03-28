@@ -1,0 +1,31 @@
+{
+  "name": "blcdn",
+  "version": "0.0.0",
+  "description": "Bloglovin CDN client",
+  "main": "index.js",
+  "scripts": {
+    "test": "istanbul cover node_modules/.bin/_mocha -- --ui tdd -R spec --inline-diffs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bloglovin/blcdn.git"
+  },
+  "keywords": [
+    "bloglovin",
+    "cdn"
+  ],
+  "author": "Hugo Wetterberg <hugo@wetterberg.nu>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bloglovin/blcdn/issues"
+  },
+  "homepage": "https://github.com/bloglovin/blcdn",
+  "dependencies": {
+    "buffer-crc32": "^0.2.1"
+  },
+  "devDependencies": {
+    "assert": "^1.1.1",
+    "mocha": "^1.18.2",
+    "istanbul": "^0.2.6"
+  }
+}

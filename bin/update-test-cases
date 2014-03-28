@@ -1,0 +1,47 @@
+#!/usr/bin/env node
+/* jshint node: true */
+'use strict';
+
+var lib = {
+  fs: require('fs'),
+  url: require('url'),
+  path: require('path'),
+  crypto: require('crypto'),
+  Cdn: require('../index')
+};
+
+var testData = {
+  salt: lib.crypto.randomBytes(256).toString('hex'),
+  hosts: [
+    'cdn1.blovcdn.com',
+    'cdn2.blovcdn.com',
+    'cdn3.blovcdn.com'
+  ]
+};
+
+var cdn = new lib.Cdn(testData);
+
+var urlFile = lib.path.resolve(__dirname, '../test/cdn.json');
+var casesFile = lib.path.resolve(__dirname, '../test/cases.json');
+var urls = require(urlFile);
+
+testData.cases = urls.map(function resalt(cdnUrl) {
+  var purl = lib.url.parse(cdnUrl);
+  var parts = purl.pathname.split('/');
+  var format = parts[3];
+  var encoded = parts[4];
+  var url = decodeURIComponent(new Buffer(encoded, 'base64').toString('utf8'));
+
+  return {
+    cdnUrl: cdnUrl,
+    resaltedCdnUrl: cdn.imageUrl(url, format),
+    signature: parts[2],
+    resaltedSignature: cdn.urlSignature(encoded, format),
+    format: format,
+    host: purl.host,
+    encoded: encoded,
+    url: url
+  };
+});
+
+lib.fs.writeFile(casesFile, JSON.stringify(testData, null, '  '));

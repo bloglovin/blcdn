@@ -24,6 +24,23 @@ function Cdn(options) {
 }
 module.exports = Cdn;
 
+/**
+ * Decodes a CDN url and returns the underlying url. Returns the url unchanged if it
+ * is not identified as a CDN url.
+ * @param {string} url A CDN url
+ */
+Cdn.realUrl = function(url) {
+  var p = lib.url.parse(url);
+  if (this.hosts.indexOf(p.hostname) !== -1) {
+    var s = p.pathname.split('/');
+    if (s.length === 5) {
+      var enc = new Buffer(s[4], 'base64').toString('utf8');
+      return decodeURIComponent(enc);
+    }
+  }
+  return url;
+};
+
 Cdn.prototype.imageUrl = function (url, size) {
   size = size || 's';
 

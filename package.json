@@ -4,7 +4,9 @@
   "description": "Bloglovin CDN client",
   "main": "index.js",
   "scripts": {
-    "test": "istanbul cover node_modules/.bin/_mocha -- --ui tdd -R spec --inline-diffs"
+    "test": "node -e \"require('grunt').tasks(['test']);\"",
+    "test-all": "node -e \"require('grunt').tasks(['test-all']);\"",
+    "prepush": "npm test"
   },
   "repository": {
     "type": "git",
@@ -24,8 +26,10 @@
     "buffer-crc32": "^0.2.1"
   },
   "devDependencies": {
-    "assert": "^1.1.1",
-    "mocha": "^1.18.2",
-    "istanbul": "^0.2.6"
+    "grunt": "^0.4.5",
+    "husky": "^0.6.2",
+    "istanbul": "^0.3.5",
+    "lintlovin": "^1.9.1",
+    "mocha": "^2.1.0"
   }
 }

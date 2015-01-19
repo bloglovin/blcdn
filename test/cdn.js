@@ -1,5 +1,5 @@
 /* jshint node: true */
-/*global suite, test, before */
+/*global suite, test */
 'use strict';
 
 var lib = {
@@ -62,14 +62,14 @@ suite('CDN - conformance', function testProcessing() {
   test('Check encode method', function checkEncode() {
     cases.forEach(function checkTestCase(info, idx) {
       assert.equal(reCdn.encodeUrl(info.url), info.encoded,
-         'Encode (urlencode+base64) of url ' + idx + ' (' + info.url + ') didn\'t match');
+        'Encode (urlencode+base64) of url ' + idx + ' (' + info.url + ') didn\'t match');
     });
   });
 
   test('Check host mapping', function checkHost() {
     cases.forEach(function checkTestCase(info, idx) {
       assert.equal(reCdn.getHost(info.encoded), info.host,
-         'CDN host from url ' + idx + ' (' + info.url + ') didn\'t match');
+        'CDN host from url ' + idx + ' (' + info.url + ') didn\'t match');
     });
   });
 
@@ -78,14 +78,14 @@ suite('CDN - conformance', function testProcessing() {
     test('Check real CDN URL signing', function checkEncode() {
       cases.forEach(function checkTestCase(info, idx) {
         assert.equal(cdn.urlSignature(info.encoded, info.format), info.signature,
-           'The signature of the url ' + idx + ' (' + info.url + ') didn\'t match');
+          'The signature of the url ' + idx + ' (' + info.url + ') didn\'t match');
       });
     });
 
     test('Check real CDN URL', function checkSignatures() {
       cases.forEach(function checkTestCase(info, idx) {
         assert.equal(cdn.imageUrl(info.url, info.format), info.cdnUrl,
-           'CDN URL for url ' + idx + ' (' + info.url + ') didn\'t match');
+          'CDN URL for url ' + idx + ' (' + info.url + ') didn\'t match');
       });
     });
   }
@@ -93,14 +93,14 @@ suite('CDN - conformance', function testProcessing() {
   test('Check re-salted CDN URL signing', function checkEncode() {
     cases.forEach(function checkTestCase(info, idx) {
       assert.equal(reCdn.urlSignature(info.encoded, info.format), info.resaltedSignature,
-         'The signature of the url ' + idx + ' (' + info.url + ') didn\'t match');
+        'The signature of the url ' + idx + ' (' + info.url + ') didn\'t match');
     });
   });
 
   test('Check re-salted CDN URL', function checkSignatures() {
     cases.forEach(function checkTestCase(info, idx) {
       assert.equal(reCdn.imageUrl(info.url, info.format), info.resaltedCdnUrl,
-         'CDN URL for url ' + idx + ' (' + info.url + ') didn\'t match');
+        'CDN URL for url ' + idx + ' (' + info.url + ') didn\'t match');
     });
   });
 

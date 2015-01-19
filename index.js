@@ -12,7 +12,7 @@ function Cdn(options) {
   this.schema = options.noSsl ? 'http:' : 'https:';
 
   this.salt = options.salt || null;
-  if (typeof this.salt == 'string') {
+  if (typeof this.salt === 'string') {
     this.salt = new Buffer(this.salt, 'hex');
   }
 

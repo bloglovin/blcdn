@@ -29,7 +29,7 @@ module.exports = Cdn;
  * is not identified as a CDN url.
  * @param {string} url A CDN url
  */
-Cdn.realUrl = function(url) {
+Cdn.prototype.realUrl = function(url) {
   var p = lib.url.parse(url);
   if (this.hosts.indexOf(p.hostname) !== -1) {
     var s = p.pathname.split('/');
